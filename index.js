@@ -2,6 +2,8 @@ var canvas;
 var ctx;
 var original_data;
 
+const box_size = 600;
+
 function render_image()
 {
 	var hue = document.getElementById("hue_box").checked;
@@ -155,8 +157,8 @@ function make_hcl_plot(pixels)
 
 	var layout =
 	{
-		width: 800,
-		height: 800,
+		width: box_size,
+		height: box_size,
 		margin: {
 			l: 0,
 			r: 0,
@@ -224,8 +226,8 @@ function make_hc_plot(pixels)
 
 	var layout =
 	{
-		width: 800,
-		height: 800,
+		width: box_size,
+		height: box_size,
 		margin: {
 			l: 0,
 			r: 0,
@@ -278,8 +280,6 @@ function process_pixels(data)
 
 function on_file_selected(e)
 {
-	var cmax = 800;
-
 	var image_src = URL.createObjectURL(event.target.files[0]);
 	var img = new Image();
 	img.src = image_src;
@@ -287,13 +287,13 @@ function on_file_selected(e)
 	{
 		if (img.width > img.height)
 		{
-			canvas.width = cmax;
-			canvas.height = cmax / img.width * img.height;
+			canvas.width = box_size;
+			canvas.height = box_size / img.width * img.height;
 		}
 		else
 		{
-			canvas.height = cmax;
-			canvas.width = cmax / img.height * img.width;
+			canvas.height = box_size;
+			canvas.width = box_size / img.height * img.width;
 		}
 		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 		original_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -318,9 +318,4 @@ function setup()
 	document.getElementById("hue_box").onchange = on_boxes_changed;
 	document.getElementById("saturation_box").onchange = on_boxes_changed;
 	document.getElementById("lightness_box").onchange = on_boxes_changed;
-
-	var obj = new Map;
-	var a = [1,2,3];
-	obj.set(a, 100);
-	console.log(obj.get(a));
 }
