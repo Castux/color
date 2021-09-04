@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>The cool thing with colors!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="index.css">
+	<script src="https://cdn.plot.ly/plotly-2.4.1.min.js"></script>
+</head>
+
+<body>
+	<h1>Color stuff!</h1>
+	<div>
+		<input type="checkbox" id="hue_box" name="hue_box" checked>
+		<label for="hue_box">Hue</label>
+		<input type="checkbox" id="saturation_box" name="saturation_box" checked>
+		<label for="saturation_box">Saturation</label>
+		<input type="checkbox" id="lightness_box" name="lightness_box" checked>
+		<label for="lightness_box">Lightness</label>
+	</div>
+	<div>
+		<input type="file"  accept="image/*" name="image" id="file_selector">
+	</div>
+	<canvas id="canvas"></canvas>
+	<div id="hcl-plot" class="plot"></div>
+	<div id="hc-plot" class="plot"></div>
+	<script src="index.js"></script>
+	<script>setup();</script>
+</body>
+</html>
