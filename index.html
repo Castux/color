@@ -5,25 +5,41 @@
 	<title>The cool thing with colors!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="index.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 	<script src="https://cdn.plot.ly/plotly-2.4.1.min.js"></script>
 </head>
 
 <body>
-	<h1>Color stuff!</h1>
-	<div>
-		<input type="checkbox" id="hue_box" name="hue_box" checked>
-		<label for="hue_box">Hue</label>
-		<input type="checkbox" id="saturation_box" name="saturation_box" checked>
-		<label for="saturation_box">Saturation</label>
-		<input type="checkbox" id="lightness_box" name="lightness_box" checked>
-		<label for="lightness_box">Lightness</label>
+	<div class="container border py-3 my-3">
+		<h1>Color stuff!</h1>
+		<form>
+			<div class="mb-3">
+				<input type="checkbox" class="btn-check" id="hue_box" autocomplete="off" checked>
+				<label class="btn btn-outline-primary" for="hue_box">Hue</label>
+				<input type="checkbox" class="btn-check" id="saturation_box" autocomplete="off" checked>
+				<label class="btn btn-outline-primary" for="saturation_box">Saturation</label>
+				<input type="checkbox" class="btn-check" id="lightness_box" autocomplete="off" checked>
+				<label class="btn btn-outline-primary" for="lightness_box">Lightness</label>
+			</div>
+			<div class="mb-3">
+				<input type="file" class="form-control" accept="image/*" name="image" id="file_selector">
+			</div>
+		</form>
+
+		<div class="row">
+			<div class="col">
+				<canvas id="canvas"></canvas>
+			</div>
+			<div class="col">
+				<div id="hc-plot" class="plot"></div>
+			</div>
+			<div class="col">
+				<div id="hcl-plot" class="plot"></div>
+			</div>
+		</div>
 	</div>
-	<div>
-		<input type="file"  accept="image/*" name="image" id="file_selector">
-	</div>
-	<canvas id="canvas"></canvas>
-	<div id="hcl-plot" class="plot"></div>
-	<div id="hc-plot" class="plot"></div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 	<script src="index.js"></script>
 	<script>setup();</script>
 </body>

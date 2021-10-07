@@ -2,7 +2,7 @@ var canvas;
 var ctx;
 var original_data;
 
-const box_size = 600;
+const box_size = 500;
 
 function render_image()
 {
