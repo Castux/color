@@ -2,17 +2,6 @@ const gridSize = 12;
 var cells = [];
 var colorCount = 2;
 
-function hexToRgb(hex)
-{
-  var aRgbHex = hex.match(/[a-f\d]{1,2}/g);
-  var aRgb = [
-      parseInt(aRgbHex[0], 16),
-      parseInt(aRgbHex[1], 16),
-      parseInt(aRgbHex[2], 16)
-  ];
-  return aRgb;
-}
-
 function interpolate(a, b, x, correctLightness)
 {
     var p = [
@@ -115,7 +104,7 @@ function drawPalette()
     }
   }
 
-  make_hcl_plot(results, "hclPlot");
+  make_hcl_plot(results, "hclPlot", 800);
 }
 
 function resetNumber()

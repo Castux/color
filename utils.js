@@ -112,12 +112,10 @@ function rgb(h,c,l)
 var staticLayout;
 var staticSeries;
 
-function make_hcl_plot(pixels, divName)
+function make_hcl_plot(pixels, divName, box_size)
 {
   if(!staticLayout)
   {
-    var box_size = document.getElementById("color-palette").offsetWidth * 0.75;
-
   	staticLayout =
   	{
   		width: box_size,
@@ -156,4 +154,15 @@ function make_hcl_plot(pixels, divName)
   }
 
 	Plotly.react(divName, staticSeries, staticLayout);
+}
+
+function hexToRgb(hex)
+{
+  var aRgbHex = hex.match(/[a-f\d]{1,2}/g);
+  var aRgb = [
+      parseInt(aRgbHex[0], 16),
+      parseInt(aRgbHex[1], 16),
+      parseInt(aRgbHex[2], 16)
+  ];
+  return aRgb;
 }
