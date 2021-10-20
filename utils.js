@@ -166,3 +166,14 @@ function hexToRgb(hex)
   ];
   return aRgb;
 }
+
+function clamp(arr, min, max)
+{
+  for(var i = 0 ; i < arr.length ; i++)
+  {
+    if (arr[i] < min)
+      arr[i] = min;
+    else if (arr[i] > max)
+      arr[i] = max;
+  }
+}

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Color multiplication</title>
+	<title>Color blending</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="index.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
@@ -10,7 +10,19 @@
 
 <body>
 	<div class="container border py-3 my-3">
-		<h1>Color multiplication!</h1>
+		<h1>Color blending!</h1>
+		<label for="mode">Blend mode:</label>
+		<select class="form-select" id="mode">
+			<option>Multiply</option>
+			<option>Screen</option>
+			<option>Overlay</option>
+			<option>Color burn</option>
+			<option>Linear burn</option>
+			<option>Color dodge</option>
+			<option>Linear dodge</option>
+			<option>Lighten</option>
+			<option>Darken</option>
+		</select>
 		<input type="color" class="form-control form-control-color color-selector" id="color" value="#ffffff" title="Color">
   </div>
   <div id="hclPlot" class="container">
