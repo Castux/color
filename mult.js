@@ -82,6 +82,13 @@ function redraw()
           Math.min(b, multiplier[2])
         ];
         break;
+      case "Hard light":
+        color = [
+          multiplier[0] > 0.5 ? 1 - (1 - r) * (1 - 2 * (multiplier[0] - 0.5)) : 2 * r * multiplier[0],
+          multiplier[1] > 0.5 ? 1 - (1 - g) * (1 - 2 * (multiplier[1] - 0.5)) : 2 * g * multiplier[1],
+          multiplier[2] > 0.5 ? 1 - (1 - b) * (1 - 2 * (multiplier[2] - 0.5)) : 2 * b * multiplier[2],
+        ];
+        break;
     }
 
     clamp(color, 0, 1);
