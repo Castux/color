@@ -1,5 +1,6 @@
 const gridSize = 12;
 var cells = [];
+var colorCount = 2;
 
 function hexToRgb(hex)
 {
@@ -29,50 +30,56 @@ function interpolate(a, b, x)
 function setupDivs()
 {
     var container = document.getElementById("color-palette");
-    container.innerHtml = "";
+    container.innerHTML = "";
 
-    var row = document.createElement("div");
-    row.classList.add("row");
-    container.appendChild(row);
-
-    cells = [];
-
-    for (var i = 0 ; i < gridSize ; i++)
+    if (colorCount == 2)
     {
-      var cell = document.createElement("div");
-      cell.classList.add("col");
-      cell.classList.add("cell-" + i);
-      cell.classList.add("cell");
-      row.appendChild(cell);
-      cells.push(cell);
+
+      var row = document.createElement("div");
+      row.classList.add("row");
+      container.appendChild(row);
+
+      cells = [];
+
+      for (var i = 0 ; i < gridSize ; i++)
+      {
+        var cell = document.createElement("div");
+        cell.classList.add("col");
+        cell.classList.add("cell-" + i);
+        cell.classList.add("cell");
+        row.appendChild(cell);
+        cells.push(cell);
+      }
     }
 }
 
 function drawPalette()
 {
-  var count = document.getElementById("numpoints").value;
   var colors = [];
-  for(var i = 1; i <= count; i++)
+  for(var i = 1; i <= colorCount; i++)
   {
     var input = document.getElementById("color" + i);
     colors[i - 1] = hexToRgb(input.value);
   }
 
-  cells.forEach((cell, i) =>
+  if (colorCount == 2)
   {
-    var col = interpolate(colors[0], colors[1], i / cells.length);
-    cell.style.backgroundColor = rgbToCss(col);
-  });
+    cells.forEach((cell, i) =>
+    {
+      var col = interpolate(colors[0], colors[1], i / cells.length);
+      cell.style.backgroundColor = rgbToCss(col);
+    });
+  }
 }
 
 function resetNumber()
 {
-  var count = document.getElementById("numpoints").value;
+  colorCount = document.getElementById("numpoints").value;
 
   for(var i = 1; i <= 4; i++)
   {
     var input = document.getElementById("color" + i);
-    input.style.display = i <= count ? "" : "none";
+    input.style.display = i <= colorCount ? "" : "none";
   }
 
   setupDivs();
