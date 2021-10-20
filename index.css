@@ -19,3 +19,8 @@ body {
 	vertical-align: middle;
 }
 */
+
+.cell
+{
+	min-height: 4em;
+}

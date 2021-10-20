@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Color interpolation</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="index.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container border py-3 my-3">
+		<h1>Color interpolation!</h1>
+    <div class="form-group my-3">
+      <label for="numpoints">Number of points:</label>
+      <select class="form-select" id="numpoints">
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+      </select>
+    </div>
+    <div class="form-group my-3 row" id="color-selectors">
+      <div class="col-1">
+        <input type="color" class="form-control form-control-color color-selector" id="color1" value="#563d7c" title="Color 1">
+      </div>
+      <div class="col-1">
+        <input type="color" class="form-control form-control-color color-selector" id="color2" value="#563d7c" title="Color 2">
+      </div>
+      <div class="col-1">
+        <input type="color" class="form-control form-control-color color-selector" id="color3" value="#563d7c" title="Color 2">
+      </div>
+      <div class="col-1">
+        <input type="color" class="form-control form-control-color color-selector" id="color4" value="#563d7c" title="Color 2">
+      </div>
+    </div>
+  </div>
+  <div class="container border py-3 my-3" id="color-palette">
+  </div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+  <script src="https://cdn.plot.ly/plotly-2.4.1.min.js"></script>
+  <script src="interp.js"></script>
+	<script>setup();</script>
+</body>
+</html>
