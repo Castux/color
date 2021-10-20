@@ -80,6 +80,35 @@ function hcl(r,g,b)
 	return [h / 6, chroma / 255, light / 255];
 }
 
+function rgb(h,c,l)
+{
+  var h2 = h * 6;
+
+  var max = l + c/2;
+  var min = l - c/2;
+  var mid = min + (1 - Math.abs(h2 % 2 - 1)) * c;
+
+  max *= 255;
+  min *= 255;
+  mid *= 255;
+
+  switch (Math.floor(h2))
+  {
+    case 0:
+      return [max, mid, min];
+    case 1:
+      return [mid, max, min];
+    case 2:
+      return [min, max, mid];
+    case 3:
+      return [min, mid, max];
+    case 4:
+      return [mid, min, max];
+    case 5:
+      return [max, min, mid];
+  }
+}
+
 var staticLayout;
 var staticSeries;
 

@@ -13,13 +13,28 @@ function hexToRgb(hex)
   return aRgb;
 }
 
-function interpolate(a, b, x)
+function interpolate(a, b, x, hsvSpace)
 {
-  return [
-    a[0] * (1-x) + b[0] * x,
-    a[1] * (1-x) + b[1] * x,
-    a[2] * (1-x) + b[2] * x,
-  ];
+  if (hsvSpace)
+  {
+    var a2 = hcl(a[0], a[1], a[2]);
+    var b2 = hcl(b[0], b[1], b[2]);
+
+    var interp = [
+      a2[0] * (1-x) + b2[0] * x,
+      a2[1] * (1-x) + b2[1] * x,
+      a2[2] * (1-x) + b2[2] * x,
+    ];
+
+    return rgb(interp[0], interp[1], interp[2]);
+  }
+  else {
+    return [
+      a[0] * (1-x) + b[0] * x,
+      a[1] * (1-x) + b[1] * x,
+      a[2] * (1-x) + b[2] * x,
+    ];
+  }
 }
 
 function setupDivs()
@@ -70,13 +85,15 @@ function drawPalette()
     colors[i - 1] = hexToRgb(input.value);
   }
 
+  var hslSpace = document.getElementById("use-hsl").checked;
+
   var results = [];
 
   if (colorCount == 2)
   {
     cells[0].forEach((cell, i) =>
     {
-      var col = interpolate(colors[0], colors[1], i / (gridSize-1));
+      var col = interpolate(colors[0], colors[1], i / (gridSize-1), hslSpace);
       cell.style.backgroundColor = rgbToCss(col);
       results.push(col);
     });
@@ -88,9 +105,9 @@ function drawPalette()
       for(var j = 0; j < gridSize ; j++)
       {
         var cell = cells[i][j];
-        var c1 = interpolate(colors[0], colors[1], j / (gridSize-1));
-        var c2 = interpolate(colors[2], colors[3], j / (gridSize-1));
-        var col = interpolate(c1, c2, i / (gridSize-1));
+        var c1 = interpolate(colors[0], colors[1], j / (gridSize-1), hslSpace);
+        var c2 = interpolate(colors[2], colors[3], j / (gridSize-1), hslSpace);
+        var col = interpolate(c1, c2, i / (gridSize-1), hslSpace);
         cell.style.backgroundColor = rgbToCss(col);
         results.push(col);
       }
@@ -121,6 +138,8 @@ function setup()
   {
     selector.oninput = drawPalette;
   }
+
+  document.getElementById("use-hsl").oninput = drawPalette;
 
   resetNumber();
 }
