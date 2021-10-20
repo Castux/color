@@ -21,10 +21,10 @@
     </div>
     <div class="form-group my-3 row" id="color-selectors">
       <div class="col-1">
-        <input type="color" class="form-control form-control-color color-selector" id="color1" value="#563d7c" title="Color 1">
+        <input type="color" class="form-control form-control-color color-selector" id="color1" value="#000000" title="Color 1">
       </div>
       <div class="col-1">
-        <input type="color" class="form-control form-control-color color-selector" id="color2" value="#563d7c" title="Color 2">
+        <input type="color" class="form-control form-control-color color-selector" id="color2" value="#ffffff" title="Color 2">
       </div>
       <div class="col-1">
         <input type="color" class="form-control form-control-color color-selector" id="color3" value="#563d7c" title="Color 2">
@@ -36,9 +36,13 @@
   </div>
   <div class="container border" id="color-palette">
   </div>
+  <div id="hclPlot" class="container">
+  </div>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
   <script src="https://cdn.plot.ly/plotly-2.4.1.min.js"></script>
+  <script src="utils.js"></script>
   <script src="interp.js"></script>
 	<script>setup();</script>
 </body>

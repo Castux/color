@@ -13,11 +13,6 @@ function hexToRgb(hex)
   return aRgb;
 }
 
-function rgbToCss(rgb)
-{
-  return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-}
-
 function interpolate(a, b, x)
 {
   return [
@@ -32,24 +27,37 @@ function setupDivs()
     var container = document.getElementById("color-palette");
     container.innerHTML = "";
 
-    if (colorCount == 2)
-    {
+    cells = [];
 
+    function addRow()
+    {
       var row = document.createElement("div");
       row.classList.add("row");
       container.appendChild(row);
 
-      cells = [];
+      var array = [];
 
       for (var i = 0 ; i < gridSize ; i++)
       {
         var cell = document.createElement("div");
         cell.classList.add("col");
-        cell.classList.add("cell-" + i);
         cell.classList.add("cell");
         row.appendChild(cell);
-        cells.push(cell);
+        array.push(cell);
       }
+
+      cells.push(array);
+    }
+
+    switch (colorCount)
+    {
+      case 2:
+        addRow();
+        break;
+      case 4:
+        for(var i = 0; i < gridSize ; i++)
+          addRow();
+        break;
     }
 }
 
@@ -62,19 +70,39 @@ function drawPalette()
     colors[i - 1] = hexToRgb(input.value);
   }
 
+  var results = [];
+
   if (colorCount == 2)
   {
-    cells.forEach((cell, i) =>
+    cells[0].forEach((cell, i) =>
     {
-      var col = interpolate(colors[0], colors[1], i / cells.length);
+      var col = interpolate(colors[0], colors[1], i / (gridSize-1));
       cell.style.backgroundColor = rgbToCss(col);
+      results.push(col);
     });
   }
+  else if (colorCount == 4)
+  {
+    for(var i = 0; i < gridSize ; i++)
+    {
+      for(var j = 0; j < gridSize ; j++)
+      {
+        var cell = cells[i][j];
+        var c1 = interpolate(colors[0], colors[1], j / (gridSize-1));
+        var c2 = interpolate(colors[2], colors[3], j / (gridSize-1));
+        var col = interpolate(c1, c2, i / (gridSize-1));
+        cell.style.backgroundColor = rgbToCss(col);
+        results.push(col);
+      }
+    }
+  }
+
+  make_hcl_plot(results, "hclPlot");
 }
 
 function resetNumber()
 {
-  colorCount = document.getElementById("numpoints").value;
+  colorCount = parseInt(document.getElementById("numpoints").value);
 
   for(var i = 1; i <= 4; i++)
   {
