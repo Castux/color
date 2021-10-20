@@ -13,28 +13,29 @@ function hexToRgb(hex)
   return aRgb;
 }
 
-function interpolate(a, b, x, hsvSpace)
+function interpolate(a, b, x, correctLightness)
 {
-  if (hsvSpace)
-  {
-    var a2 = hcl(a[0], a[1], a[2]);
-    var b2 = hcl(b[0], b[1], b[2]);
-
-    var interp = [
-      a2[0] * (1-x) + b2[0] * x,
-      a2[1] * (1-x) + b2[1] * x,
-      a2[2] * (1-x) + b2[2] * x,
-    ];
-
-    return rgb(interp[0], interp[1], interp[2]);
-  }
-  else {
-    return [
+    var p = [
       a[0] * (1-x) + b[0] * x,
       a[1] * (1-x) + b[1] * x,
       a[2] * (1-x) + b[2] * x,
     ];
-  }
+
+    if (correctLightness)
+    {
+      var a2 = hcl(a[0], a[1], a[2]);
+      var b2 = hcl(b[0], b[1], b[2]);
+      var p2 = hcl(p[0], p[1], p[2]);
+
+      var target_light = a2[2] * (1-x) + b2[2] * x;
+      var light_diff = target_light - p2[2];
+
+      p[0] += light_diff * 255;
+      p[1] += light_diff * 255;
+      p[2] += light_diff * 255;
+    }
+
+    return p;
 }
 
 function setupDivs()
