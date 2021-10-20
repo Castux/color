@@ -35,9 +35,9 @@ function redraw()
         break;
       case "Overlay":
         color = [
-          multiplier[0] < 0.5 ? 2 * r * multiplier[0] : 1 - 2 * (1 - r) * (1 - multiplier[0]),
-          multiplier[1] < 0.5 ? 2 * g * multiplier[1] : 1 - 2 * (1 - g) * (1 - multiplier[1]),
-          multiplier[2] < 0.5 ? 2 * b * multiplier[2] : 1 - 2 * (1 - b) * (1 - multiplier[2])
+          r < 0.5 ? 2 * r * multiplier[0] : 1 - (1 - 2 * (r - 0.5)) * (1 - multiplier[0]),
+          g < 0.5 ? 2 * g * multiplier[1] : 1 - (1 - 2 * (g - 0.5)) * (1 - multiplier[1]),
+          b < 0.5 ? 2 * b * multiplier[2] : 1 - (1 - 2 * (b - 0.5)) * (1 - multiplier[2])
         ];
         break;
       case "Color burn":
