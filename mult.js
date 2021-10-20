@@ -89,6 +89,20 @@ function redraw()
           multiplier[2] > 0.5 ? 1 - (1 - b) * (1 - 2 * (multiplier[2] - 0.5)) : 2 * b * multiplier[2],
         ];
         break;
+      case "Soft light":
+        color = [
+          multiplier[0] > 0.5 ? 1 - (1 - r) * (1 - (multiplier[0] - 0.5)) : r * (multiplier[0] + 0.5),
+          multiplier[1] > 0.5 ? 1 - (1 - g) * (1 - (multiplier[1] - 0.5)) : g * (multiplier[1] + 0.5),
+          multiplier[2] > 0.5 ? 1 - (1 - b) * (1 - (multiplier[2] - 0.5)) : b * (multiplier[2] + 0.5),
+        ];
+        break;
+      case "Vivid light":
+        color = [
+          multiplier[0] > 0.5 ? r / (1 - 2 * (multiplier[0] - 0.5)) : 1 - (1 - r) / (2 * multiplier[0]),
+          multiplier[1] > 0.5 ? g / (1 - 2 * (multiplier[1] - 0.5)) : 1 - (1 - g) / (2 * multiplier[1]),
+          multiplier[2] > 0.5 ? b / (1 - 2 * (multiplier[2] - 0.5)) : 1 - (1 - b) / (2 * multiplier[2]),
+        ];
+        break;
     }
 
     clamp(color, 0, 1);
