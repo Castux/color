@@ -2,7 +2,7 @@ var canvas;
 var ctx;
 var original_data;
 
-const box_size = 500;
+var box_size;
 
 function render_image()
 {
@@ -295,6 +295,7 @@ function on_file_selected(e)
 			canvas.height = box_size;
 			canvas.width = box_size / img.height * img.width;
 		}
+		ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 		original_data = ctx.getImageData(0, 0, canvas.width, canvas.height);
 		canvas.removeAttribute("data-caman-id");
@@ -309,6 +310,8 @@ function on_boxes_changed(e)
 
 function setup()
 {
+	box_size = window.innerWidth / 3.2;
+
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 
@@ -318,4 +321,9 @@ function setup()
 	document.getElementById("hue_box").onchange = on_boxes_changed;
 	document.getElementById("saturation_box").onchange = on_boxes_changed;
 	document.getElementById("lightness_box").onchange = on_boxes_changed;
+
+	window.onresize = () => {
+		box_size = document.innerWidth / 3.2;
+		on_boxes_changed();
+	};
 }
